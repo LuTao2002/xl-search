@@ -50,9 +50,12 @@
     <div
       :class="focusShow ? 'home-img back' : 'home-img'"
       @click="clear"
-      :style="{ background: !focusShow ? `url(${url}) center center / cover fixed` : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${url}) center center / cover fixed` }"
+      :style="{ background: `url(${url}) center center / cover fixed` }"
     ></div>
-    <!-- <div @click="clear" :class="focusShow ? 'background back-black' : 'background'"></div> -->
+    <div
+      @click="clear"
+      :class="focusShow ? 'background back-black' : 'background'"
+    ></div>
   </div>
 </template>
 
@@ -171,7 +174,7 @@ export default {
     },
     // 清空
     clear() {
-        console.log('!!!')
+      console.log("!!!");
       this.input = "";
       this.$attrs.msg = "";
       this.searchMsg = false;
@@ -201,17 +204,15 @@ export default {
   color: #1e90ff !important;
 }
 .back {
+  // z-index: -1 !important;
   transition: 0.3s !important;
 
   transform: scale(1.05) !important;
 }
-// .back-black {
-//     filter: blur(5px) !important;
-//     background: black !important;
-//     opacity: 0.5;
-//     transform: calc(1.05) !important;
-//     transition: 0.3s !important;
-// }
+.back-black {
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(10px);
+}
 .pc-home {
   height: 100%;
   width: 100%;
@@ -225,22 +226,22 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: 1;
+    // z-index: 1;
     // background: url(https://cn.bing.com//th?id=OHR.NuzzleManatee_ZH-CN3263788190_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp)
     //   center center / cover fixed;
     // background: center center / cover fixed;
   }
 
-//   .background {
-//     width: 100%;
-//     height: 100%;
-//     position: relative;
-//     left: 0;
-//     right: 0;
-//     top: 0;
-//     bottom: 0;
-//     z-index: 10;
-//   }
+    .background {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 10;
+    }
   .search {
     width: 50%;
     height: 50px;
@@ -306,13 +307,13 @@ export default {
       opacity: unset;
     }
   }
-//   .search:has(> .input:focus-within) ~ .background {
-//     filter: blur(5px);
-//     background: black;
-//     opacity: 0.5;
-//     transform: calc(1.05);
-//     transition: 0.3s;
-//   }
+  //   .search:has(> .input:focus-within) ~ .background {
+  //     filter: blur(5px);
+  //     background: black;
+  //     opacity: 0.5;
+  //     transform: calc(1.05);
+  //     transition: 0.3s;
+  //   }
   //   .search:has(> .input:focus-within) ~ .searchChange {
   //     display: none;
   //   }
@@ -324,7 +325,7 @@ export default {
     top: 39%;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 3;
+    z-index: 20;
     .searchChange {
       width: 100%;
       height: auto;
