@@ -1,12 +1,22 @@
 <template>
   <div class="pc-box">
-    <div :class="menuBox ? 'pc-home index' : 'pc-home'" >
+    <div :class="menuBox ? 'pc-home index' : 'pc-home'">
       <div class="search">
-        <div class="input">
-          <img @click="searchChange = !searchChange; menuBox = false" :src="imgUrl.url" alt="" />
+        <div :class="imgData.msg == '失败' ? 'input opacity' : 'input'">
+          <img
+            @click="
+              searchChange = !searchChange;
+              menuBox = false;
+            "
+            :src="imgUrl.url"
+            alt=""
+          />
           <input
             @focus="inputFocus"
-            @blur="focusShow = false; menuBtn = true"
+            @blur="
+              focusShow = false;
+              menuBtn = true;
+            "
             @keyup.enter="getSearch()"
             type="text"
             v-model="input"
@@ -50,13 +60,21 @@
             </ul>
           </el-collapse-transition>
         </div>
-        <p class="txt">{{ wordData }}</p>
+        <p
+          class="txt"
+          :style="{ color: imgData.msg == '失败' ? '#000000' : '#fff' }"
+        >
+          {{ wordData }}
+        </p>
       </div>
       <div
         :class="focusShow ? 'home-img back' : 'home-img'"
         @click="clear"
         :style="{
-          background: `url(${imgData.url}) center center / cover fixed`,
+          background:
+            imgData.msg == '失败'
+              ? '#f7f7f7'
+              : `url(${imgData.url}) center center / cover fixed`,
         }"
       ></div>
       <div
@@ -64,9 +82,27 @@
         :class="focusShow ? 'background back-black' : 'background'"
       ></div>
     </div>
-    <div class="menuBtn" v-if="menuBtn" @click="menuBox = true; menuBtn = false"><i class="el-icon-arrow-up"></i></div>
+    <div
+      class="menuBtn"
+      v-if="menuBtn"
+      @click="
+        menuBox = true;
+        menuBtn = false;
+      "
+      :style="{ color: imgData.msg == '失败' ? '#000000' : '#fff' }"
+    >
+      <i class="el-icon-arrow-up"></i>
+    </div>
     <transition name="el-zoom-in-bottom">
-      <menu-box style="padding: 0;" v-show="menuBox" class="transition-box menu" @menuClose="menuBox = false; menuBtn = true"/>
+      <menu-box
+        style="padding: 0"
+        v-show="menuBox"
+        class="transition-box menu"
+        @menuClose="
+          menuBox = false;
+          menuBtn = true;
+        "
+      />
     </transition>
   </div>
 </template>
@@ -172,8 +208,8 @@ export default {
     inputFocus() {
       this.searchChange = false;
       this.focusShow = true;
-      this.menuBox = false
-      this.menuBtn = false
+      this.menuBox = false;
+      this.menuBtn = false;
     },
     // 搜索
     getSearch() {
@@ -197,7 +233,7 @@ export default {
       this.$attrs.msg = "";
       this.searchMsg = false;
       this.focusShow = false;
-      this.menuBox = false
+      this.menuBox = false;
     },
     // 切换默认搜索引擎
     onSwitch(index) {
@@ -220,6 +256,9 @@ export default {
   .search {
     width: 80% !important;
   }
+}
+.opacity {
+  opacity: unset !important;
 }
 .pc-box {
   width: 100%;
@@ -466,7 +505,7 @@ export default {
 }
 @keyframes run {
   0% {
-    top:85%;
+    top: 85%;
   }
   100% {
     top: 84%;
@@ -477,7 +516,7 @@ export default {
     transform: scale(1.2);
   }
   100% {
-    transform: scale(1.0);
+    transform: scale(1);
   }
 }
 </style>

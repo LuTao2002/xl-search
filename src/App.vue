@@ -44,12 +44,16 @@ export default {
         .get("/imgapi/HPImageArchive.aspx?format=js&idx=0&n=1")
         .then((res) => {
           this.imgData = {
+            msg: '成功',
             url: "https://cn.bing.com" + res.data.images[0].url,
             title: res.data.images[0].title,
           };
         })
         .catch((err) => {
           console.log("每日壁纸失败", err);
+          this.imgData = {
+            msg: '失败'
+          }
         });
     },
     getWord() {
