@@ -30,6 +30,22 @@ module.exports = {
           '^/googleapi/': '/'
         }
       },
+      '^/wordapi/': {
+        target: 'http://open.iciba.com/',
+        ws: true, 
+        changeOrigin: true,
+        pathRewrite: {
+          '^/wordapi/': '/'
+        }
+      },
+      '^/imgapi/': {
+        target: 'http://cn.bing.com/',
+        ws: true, 
+        changeOrigin: true,
+        pathRewrite: {
+          '^/imgapi/': '/'
+        }
+      },
     }
   }
 }
